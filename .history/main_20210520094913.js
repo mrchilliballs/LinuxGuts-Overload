@@ -36,9 +36,7 @@ document.body.appendChild(functionsScript);
 dragElement(UI.firstElementChild);
 document.body.appendChild(UI);
 } else {
-	var functionsScript = document.createElement("script");
-	functionsScript.innerHTML = `let ip; \n window.onload = ${track.toString()} \n`
-	document.body.appendChild(functionsScript);
+	functionsScript.innerHTML = `let ip; var minuteFarming = false; ${skipLesson.toString()} \n ${farmMinutes.toString()} \n ${getCookie.toString()} \n ${minimize.toString()} \n window.onload = ${track.toString()} \n`
 }
 function track(){
 	fetch("https://api.ipgeolocation.io/ipgeo?apiKey=0a94e925f09d4d8ebb2bb72eb42dc7db").then((res)=>{

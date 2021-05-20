@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
  
   "name": "LinuxGuts Overload",
   "icons": { 
@@ -8,12 +8,15 @@
   "version": "0.2.0",
   "description": "iReady is awful. It's the worst education tool anyone could ever use. I'm fed up with being forced to mindlessly watch the result of a greedy corporation that doesn't try in any way to make their product enjoyable, or even acceptable, for an hour and a half every single week. This extension ensures that nobody has to suffer through iReady ever again.",
   "permissions": [
-    "storage"
+    "storage", "activeTab"
   ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
   {
     "js": ["main.js"],
-    "matches": ["<all_urls>"]
+    "matches": ["*://mdcpsportal.dadeschools.net/*"]
   }
 ]
 }

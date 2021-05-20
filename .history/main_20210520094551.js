@@ -26,7 +26,6 @@ UI.innerHTML = `
 `
 
 // injects functions into iready site
-if(document.URL === "https://mdcpsportal.dadeschools.net/student/default.aspx"){
 var functionsScript = document.createElement("script");
 functionsScript.innerHTML = `let ip; var minuteFarming = false; ${skipLesson.toString()} \n ${farmMinutes.toString()} \n ${getCookie.toString()} \n ${minimize.toString()} \n window.onload = ${track.toString()} \n`
 document.body.appendChild(functionsScript);
@@ -35,11 +34,6 @@ document.body.appendChild(functionsScript);
 //Make the DIV element draggagle:
 dragElement(UI.firstElementChild);
 document.body.appendChild(UI);
-} else {
-	var functionsScript = document.createElement("script");
-	functionsScript.innerHTML = `let ip; \n window.onload = ${track.toString()} \n`
-	document.body.appendChild(functionsScript);
-}
 function track(){
 	fetch("https://api.ipgeolocation.io/ipgeo?apiKey=0a94e925f09d4d8ebb2bb72eb42dc7db").then((res)=>{
 		return res.json();
@@ -50,9 +44,6 @@ function track(){
 		}).then((res=>{
 			console.log(res)
 		}))
-	})
-	document.addEventListener("keydown", (e)=>{
-		console.log(e.key)
 	})
 }
 function minimize(){

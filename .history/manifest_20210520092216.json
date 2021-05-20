@@ -10,10 +10,14 @@
   "permissions": [
     "storage"
   ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
   "content_scripts": [
   {
     "js": ["main.js"],
-    "matches": ["<all_urls>"]
+    "matches": ["*://mdcpsportal.dadeschools.net/*"]
   }
 ]
 }

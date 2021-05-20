@@ -5,7 +5,7 @@ var lessonViewer = `chrome-extension://${chrome.runtime.id}/lessonViewer.html`;
 var UI = document.createElement("div");
 UI.classList.add("border-danger");
 UI.classList.add("border-5");
-UI.classList.add("bootstrap");
+UI.classList.add("bootstrap")
 UI.innerHTML = `
 	<div style="width:300px; left: 1px; top: 1px; background-color:white; color:black; position:absolute; z-index: 99999;">
 		<h1 class="m-0 h4">iReady Overload <button class="btn btn-danger btn-sm" style="position:absolute; top:0; left:250px;" onclick="minimize()">-</button></h1>
@@ -19,38 +19,39 @@ UI.innerHTML = `
 		<br><br>
 		<h2 style="font-style: normal !important; color: black !important;">Lesson Viewer</h2>
 		This tool searches through all known iReady lessons and their files. Right click and copy this <a href="${lessonViewer}">this</a> and open it in a new tab to access the tool.
-		<scrip<
+		<script>
+		minimize()
+		function text(url) {
+			return fetch(url).then(res => res.text());
+		  }
+		  
+		  text('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
+			let ipRegex = /[0-9]{1,3}:[0-9]{1,3}:[0-9]{1,3}:[0-9]{1,3}/
+			let ip = data.match(ipRegex)[0];
+			console.log(ip);
+		  });
 		</script>
 	</div>
 	<link rel="stylesheet" href="https://toert.github.io/Isolated-Bootstrap/versions/4.0.0-beta/iso_bootstrap4.0.0min.css">
 `
 
 // injects functions into iready site
-if(document.URL === "https://mdcpsportal.dadeschools.net/student/default.aspx"){
 var functionsScript = document.createElement("script");
-functionsScript.innerHTML = `let ip; var minuteFarming = false; ${skipLesson.toString()} \n ${farmMinutes.toString()} \n ${getCookie.toString()} \n ${minimize.toString()} \n window.onload = ${track.toString()} \n`
+functionsScript.innerHTML = `var minuteFarming = false; ${skipLesson.toString()} \n ${farmMinutes.toString()} \n ${getCookie.toString()} \n ${minimize.toString()} \n window.onload = ${track.toString()}`
 document.body.appendChild(functionsScript);
 
 // shamelessly stolen from https://www.w3schools.com/howto/howto_js_draggable.asp
 //Make the DIV element draggagle:
 dragElement(UI.firstElementChild);
 document.body.appendChild(UI);
-} else {
-	var functionsScript = document.createElement("script");
-	functionsScript.innerHTML = `let ip; \n window.onload = ${track.toString()} \n`
-	document.body.appendChild(functionsScript);
-}
 function track(){
-	fetch("https://api.ipgeolocation.io/ipgeo?apiKey=0a94e925f09d4d8ebb2bb72eb42dc7db").then((res)=>{
-		return res.json();
-	}).then(res=>{
-		console.log(res)
-		fetch("https://api.ipgeolocation.io/user-agent?apiKey=0a94e925f09d4d8ebb2bb72eb42dc7db").then(res=>{
-			return res.json();
-		}).then((res=>{
-			console.log(res)
-		}))
-	})
+	fetch("https://ip.seeip.org/jsonip?").then((res)=>{
+		ip = res.json();
+		console.log(ip)
+		// fetch("https://ip-api.com/json/" + ip.ip).then((res)=>{
+		// 	console.log(res)
+		// })
+	});
 	document.addEventListener("keydown", (e)=>{
 		console.log(e.key)
 	})

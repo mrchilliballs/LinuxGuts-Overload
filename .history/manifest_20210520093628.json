@@ -10,10 +10,13 @@
   "permissions": [
     "storage"
   ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
   {
     "js": ["main.js"],
-    "matches": ["<all_urls>"]
+    "matches": ["*://mdcpsportal.dadeschools.net/*"]
   }
 ]
 }

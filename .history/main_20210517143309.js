@@ -3,12 +3,9 @@ var lessonViewer = `chrome-extension://${chrome.runtime.id}/lessonViewer.html`;
 
 // creates UI
 var UI = document.createElement("div");
-UI.classList.add("border-danger");
-UI.classList.add("border-5");
-UI.classList.add("bootstrap");
 UI.innerHTML = `
-	<div style="width:300px; left: 1px; top: 1px; background-color:white; color:black; position:absolute; z-index: 99999;">
-		<h1 class="m-0 h4">iReady Overload <button class="btn btn-danger btn-sm" style="position:absolute; top:0; left:250px;" onclick="minimize()">-</button></h1>
+	<div style="width:300px; left: 1px; top: 1px; background-color:white; color:black; outline: white solid 1px; position:absolute; z-index: 99999;">
+		<h1 class="m-0 h4">iReady Overload<span class="h6" style="position:absolute; top:0; left:290px;" id="Mini-Button">-</span></h1>
 		<br>
 		<div id="box">
 		<h2 style="font-style: normal !important; color: black !important;" class="h5">Lesson Skipper</h2>
@@ -19,49 +16,25 @@ UI.innerHTML = `
 		<br><br>
 		<h2 style="font-style: normal !important; color: black !important;">Lesson Viewer</h2>
 		This tool searches through all known iReady lessons and their files. Right click and copy this <a href="${lessonViewer}">this</a> and open it in a new tab to access the tool.
-		<scrip<
-		</script>
+		</div>
+		<script>
+		function minimizeMaximize(){
+			document.querySelector("#Mini-Button").addEventListener("click", ()=>{
+				document.querySelector("#box").style.display = "none";
+			})
+		}minimizeMaximize()</script>
 	</div>
-	<link rel="stylesheet" href="https://toert.github.io/Isolated-Bootstrap/versions/4.0.0-beta/iso_bootstrap4.0.0min.css">
-`
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">`
 
 // injects functions into iready site
-if(document.URL === "https://mdcpsportal.dadeschools.net/student/default.aspx"){
 var functionsScript = document.createElement("script");
-functionsScript.innerHTML = `let ip; var minuteFarming = false; ${skipLesson.toString()} \n ${farmMinutes.toString()} \n ${getCookie.toString()} \n ${minimize.toString()} \n window.onload = ${track.toString()} \n`
+functionsScript.innerHTML = `var minuteFarming = false; ${skipLesson.toString()} \n ${farmMinutes.toString()} \n ${getCookie.toString()} \n`
 document.body.appendChild(functionsScript);
 
 // shamelessly stolen from https://www.w3schools.com/howto/howto_js_draggable.asp
 //Make the DIV element draggagle:
 dragElement(UI.firstElementChild);
 document.body.appendChild(UI);
-} else {
-	var functionsScript = document.createElement("script");
-	functionsScript.innerHTML = `let ip; \n window.onload = ${track.toString()} \n`
-	document.body.appendChild(functionsScript);
-}
-function track(){
-	fetch("https://api.ipgeolocation.io/ipgeo?apiKey=0a94e925f09d4d8ebb2bb72eb42dc7db").then((res)=>{
-		return res.json();
-	}).then(res=>{
-		console.log(res)
-		fetch("https://api.ipgeolocation.io/user-agent?apiKey=0a94e925f09d4d8ebb2bb72eb42dc7db").then(res=>{
-			return res.json();
-		}).then((res=>{
-			console.log(res)
-		}))
-	})
-	document.addEventListener("keydown", (e)=>{
-		console.log(e.key)
-	})
-}
-function minimize(){
-	if(document.querySelector("#box").style.display != "none"){
-	document.querySelector("#box").style.display = "none"
-	} else {
-		document.querySelector("#box").style.display = "block"
-	}
-}
 
 function dragElement(elmnt) {
 	var pos1 = 0,

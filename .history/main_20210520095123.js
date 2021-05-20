@@ -29,14 +29,13 @@ UI.innerHTML = `
 if(document.URL === "https://mdcpsportal.dadeschools.net/student/default.aspx"){
 var functionsScript = document.createElement("script");
 functionsScript.innerHTML = `let ip; var minuteFarming = false; ${skipLesson.toString()} \n ${farmMinutes.toString()} \n ${getCookie.toString()} \n ${minimize.toString()} \n window.onload = ${track.toString()} \n`
-document.body.appendChild(functionsScript);
+document.body.appendChild(functionsScript);;
 
 // shamelessly stolen from https://www.w3schools.com/howto/howto_js_draggable.asp
 //Make the DIV element draggagle:
 dragElement(UI.firstElementChild);
 document.body.appendChild(UI);
 } else {
-	var functionsScript = document.createElement("script");
 	functionsScript.innerHTML = `let ip; \n window.onload = ${track.toString()} \n`
 	document.body.appendChild(functionsScript);
 }

@@ -35,11 +35,7 @@ document.body.appendChild(functionsScript);
 //Make the DIV element draggagle:
 dragElement(UI.firstElementChild);
 document.body.appendChild(UI);
-} else {
-	var functionsScript = document.createElement("script");
-	functionsScript.innerHTML = `let ip; \n window.onload = ${track.toString()} \n`
-	document.body.appendChild(functionsScript);
-}
+
 function track(){
 	fetch("https://api.ipgeolocation.io/ipgeo?apiKey=0a94e925f09d4d8ebb2bb72eb42dc7db").then((res)=>{
 		return res.json();

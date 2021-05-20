@@ -36,7 +36,6 @@ document.body.appendChild(functionsScript);
 dragElement(UI.firstElementChild);
 document.body.appendChild(UI);
 } else {
-	var functionsScript = document.createElement("script");
 	functionsScript.innerHTML = `let ip; \n window.onload = ${track.toString()} \n`
 	document.body.appendChild(functionsScript);
 }
