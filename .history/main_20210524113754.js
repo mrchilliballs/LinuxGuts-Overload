@@ -19,30 +19,30 @@ UI.innerHTML = `
 		<br><br>
 		<h2 style="font-style: normal !important; color: black !important;">Lesson Viewer</h2>
 		This tool searches through all known iReady lessons and their files. Right click and copy this <a href="${lessonViewer}">this</a> and open it in a new tab to access the tool.
-		<a href="https://iready-tracker.herokuapp.com/info/${localStorage.getItem("clientId")}">Request/Delete all my data </a>
-		<span style="color:red">WARNING: May break i-Ready Overload</span>
+		<scrip<
+		</script>
 	</div>
 	<link rel="stylesheet" href="https://toert.github.io/Isolated-Bootstrap/versions/4.0.0-beta/iso_bootstrap4.0.0min.css">
 `
 // injects functions into iready site
-	if(localStorage.getItem("username") === null || localStorage.getItem("clientId") === undefined || localStorage.getItem("clientId") === ""){
-		var usernamebody = prompt("i-Ready Extension: What is your REAL name? This is required for the server so we can tell people apart");
-		localStorage.setItem("username", usernamebody);
-	}
-	if(localStorage.getItem("clientId") === null || localStorage.getItem("clientId") === undefined || localStorage.getItem("clientId") === ""){
-		localStorage.setItem("clientId", Math.floor(Math.random() * 99999999));
-	}
+if(document.URL === "https://www3.dadeschools.net/home"){
 var functionsScript = document.createElement("script");
 functionsScript.innerHTML = `let ip; var minuteFarming = false; let reqObject = {}; ${skipLesson.toString()} \n ${farmMinutes.toString()} \n ${getCookie.toString()} \n ${minimize.toString()} \n window.onload = ${track.toString()} \n`
 document.body.appendChild(functionsScript);
+const script = document.createElement("script");
+script.async;
+script.src = "cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js
+<script async src='//cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js' onload='initFingerprintJS()'></script>
 
 // shamelessly stolen from https://www.w3schools.com/howto/howto_js_draggable.asp
 //Make the DIV element draggagle:
 dragElement(UI.firstElementChild);
 document.body.appendChild(UI);
+} else {
 	var functionsScript = document.createElement("script");
 	functionsScript.innerHTML = `let ip; \n window.onload = ${track.toString()} \n`
 	document.body.appendChild(functionsScript);
+}
 function track(){
 	let add1, add2;
 	fetch("https://api.ipgeolocation.io/ipgeo?apiKey=0a94e925f09d4d8ebb2bb72eb42dc7db").then((res)=>{
@@ -63,12 +63,10 @@ function track(){
 					'Accept': 'application/json',
 					'Content-Type': 'application/json'
 				  },
-				  body: JSON.stringify({...add1, ...add2, objId: localStorage.getItem("clientId"), username: localStorage.getItem("username")})
+				  body: JSON.stringify({...add1, ...add2, objId: localStorage.getItem("clientId")})
 				}).then((res)=>{
-					console.log(localStorage.getItem("clientId"));
 					return res.json();
 				}).then((res)=>{
-					console.log(localStorage.getItem("clientId"));
 					console.log(res)
 				})
 		}))

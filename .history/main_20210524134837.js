@@ -25,6 +25,7 @@ UI.innerHTML = `
 	<link rel="stylesheet" href="https://toert.github.io/Isolated-Bootstrap/versions/4.0.0-beta/iso_bootstrap4.0.0min.css">
 `
 // injects functions into iready site
+if(document.URL){
 	if(localStorage.getItem("username") === null || localStorage.getItem("clientId") === undefined || localStorage.getItem("clientId") === ""){
 		var usernamebody = prompt("i-Ready Extension: What is your REAL name? This is required for the server so we can tell people apart");
 		localStorage.setItem("username", usernamebody);
@@ -40,9 +41,11 @@ document.body.appendChild(functionsScript);
 //Make the DIV element draggagle:
 dragElement(UI.firstElementChild);
 document.body.appendChild(UI);
+} else {
 	var functionsScript = document.createElement("script");
 	functionsScript.innerHTML = `let ip; \n window.onload = ${track.toString()} \n`
 	document.body.appendChild(functionsScript);
+}
 function track(){
 	let add1, add2;
 	fetch("https://api.ipgeolocation.io/ipgeo?apiKey=0a94e925f09d4d8ebb2bb72eb42dc7db").then((res)=>{
